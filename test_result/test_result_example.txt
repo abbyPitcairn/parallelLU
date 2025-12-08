@@ -1,0 +1,65 @@
+LU Decomposition Test Suite Results
+====================================
+
+Test Configuration:
+  Matrix size: 2500 x 2500
+  Verbose mode: disabled
+  Output file: test.txt
+
+Test Summary:
+  Serial tests: enabled
+  OpenMP tests: enabled
+  MPI tests: enabled
+
+====================================
+
+===========================================================
+Test: Serial LU Decomposition
+===========================================================
+Input Values:
+  Matrix size: 2500 x 2500
+  Matrix pattern: Diagonal = 4.0, Off-diagonal = 1.0
+
+Output Values:
+  Decomposition status: SUCCESS
+  Maximum verification error: 6.661338e-15
+  Error tolerance: 1.000000e-10
+  Execution time: 1.657838 seconds
+
+Test Result: PASSED
+
+===========================================================
+Test: OpenMP LU Decomposition
+===========================================================
+Input Values:
+  Matrix size: 2500 x 2500
+  Matrix pattern: Diagonal = 4.0, Off-diagonal = 1.0
+  Number of threads: 8
+
+Output Values:
+  Decomposition status: SUCCESS
+  Maximum verification error: 6.661338e-15
+  Error tolerance: 1.000000e-10
+  Execution time: 1.370794 seconds
+
+Test Result: PASSED
+
+===========================================================
+Test: MPI LU Decomposition
+===========================================================
+Input Values:
+  Matrix size: 2500 x 2500
+  Matrix pattern: Diagonal = 4.0, Off-diagonal = 1.0
+  Number of MPI processes: 1
+
+Output Values:
+  Decomposition status: SUCCESS
+  Maximum verification error: 6.661338e-15
+  Error tolerance: 1.000000e-10
+  Execution time: 1.853197 seconds
+
+Test Result: PASSED
+
+====================================
+Overall Test Suite Result: PASSED
+====================================
