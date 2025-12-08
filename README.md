@@ -6,51 +6,70 @@
 
 ### Version: December 7, 2025
 
-#### Description
+## Project Description
 
-This project runs an LU decomposition using parallel algorithms from OpenMP and MPI. 
+This project implements LU decomposition with partial pivoting using three different parallelization approaches: serial, OpenMP, and MPI. LU decomposition is a fundamental linear algebra operation that factors a matrix A into the product of a lower triangular matrix L and an upper triangular matrix U, such that PA = LU, where P is a permutation matrix representing the row exchanges from partial pivoting.
 
-#### How to run
+The project provides:
+- **Serial Implementation**: A baseline sequential implementation for comparison
+- **OpenMP Implementation**: Shared-memory parallelization using OpenMP directives for multi-threaded execution
+- **MPI Implementation**: Distributed-memory parallelization using MPI for multi-process execution with block row distribution
 
-**Build all targets:**
+Each implementation performs the same mathematical operation but uses different parallelization strategies, allowing for performance comparison across different hardware configurations and problem sizes. The project includes comprehensive testing utilities to verify correctness and measure performance across all three implementations.
+
+## Directory Overview
+
+```
+parallelLU/
+├── include/              # Header files
+│   ├── lu.h             # LU decomposition function declarations
+│   └── matrix.h         # Matrix data structure and utility functions
+├── src/                 # Source code files
+│   ├── matrix.c         # Matrix operations (creation, printing, utilities)
+│   ├── lu_serial.c      # Serial LU decomposition implementation
+│   ├── lu_openmp.c      # OpenMP-parallel LU decomposition
+│   ├── lu_mpi.c         # MPI-parallel LU decomposition
+│   ├── main_serial.c    # Serial program entry point
+│   ├── main_openmp.c    # OpenMP program entry point
+│   ├── main_mpi.c       # MPI program entry point
+│   └── test_lu.c        # Comprehensive test suite for all implementations
+├── report/              # Project documentation
+│   ├── main.tex         # LaTeX report source
+│   ├── references.bib   # Bibliography
+│   └── report.pdf       # Compiled report
+├── test_result/         # Test output examples
+│   └── test_result_example.txt
+├── Makefile            # Build configuration
+└── README.md           # This file
+```
+
+## How to Run
+
+### Quick Start - Simple Test Results
+
+**1. Build the project:**
 ```bash
 make
 ```
 
-**Run tests:**
+**2. Run the test suite:**
 ```bash
-# Test serial and OpenMP implementations
 ./test_lu
+```
 
-# Test with custom matrix size
-./test_lu -n 20
+This will run tests on the serial and OpenMP implementations with default settings and display the results.
 
-# Test with verbose output (shows matrices for small n)
-./test_lu -n 5 -v
-
-# Test only serial
-./test_lu --serial-only
-
-# Test only OpenMP
-./test_lu --openmp-only
-
-# Test MPI (requires mpirun)
-mpirun -np 4 ./test_lu --mpi-only
-
-# Test all implementations including MPI
+**3. For MPI testing (requires MPI runtime):**
+```bash
 mpirun -np 4 ./test_lu --all
 ```
 
-**Run individual programs:**
-```bash
-# Serial
-./serial [n]
+This runs all three implementations (serial, OpenMP, and MPI) with 4 MPI processes.
 
-# OpenMP
-./openmp [n] [num_threads]
+### Additional Options
 
-# MPI
-mpirun -np 4 ./mpi [n]
-```
+- Test with a specific matrix size: `./test_lu -n 50`
+- View detailed output for small matrices: `./test_lu -n 5 -v`
+- Test individual implementations: `./test_lu --serial-only` or `./test_lu --openmp-only`
 
 ---
